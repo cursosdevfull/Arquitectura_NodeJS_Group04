@@ -6,6 +6,7 @@ import { UserEntity } from './entities/user.entity';
 export class UserInfrastructure implements UserRepository {
   save(user: User): Promise<void> {
     const userEntity = UserDto.fromDomainToData(user) as UserEntity;
+
     throw new Error('Method not implemented.');
   }
 

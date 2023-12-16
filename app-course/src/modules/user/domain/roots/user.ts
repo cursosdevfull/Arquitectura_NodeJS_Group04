@@ -49,25 +49,4 @@ export class User {
       deletedAt: this.deletedAt,
     };
   }
-
-  //   static create(props: UserProperties): User {
-  //     IdVO.create(props.id);
-  //     RefreshTokenVO.create(props.refreshToken);
-  //     RolesVO.create(props.roles);
-  //     FullnameVO.create(props.fullname);
-  //     EmailVO.create(props.email);
-  // if (props.id && (props.id.length === 0 || !validate(props.id)))
-  //   throw new Error('Invalid id');
-  // if (
-  //   props.refreshToken &&
-  //   (props.refreshToken.length === 0 || !validate(props.refreshToken))
-  // )
-  //   throw new Error('Invalid refreshToken');
-  // if (props.roles.length === 0) throw new Error('Invalid roles');
-  // if (props.fullname.length === 0) throw new Error('Invalid fullname');
-  // if (!props.email.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/))
-  //   throw new Error('Invalid email');
-
-  //     return new User(props);
-  //   }
 }
