@@ -11,7 +11,7 @@ export class UserCreate {
   ) {}
 
   async execute(user: User) {
-    const userInserted = await this.repository.save(user);
-    return userInserted;
+    const userUpdate = await this.repository.save(user);
+    return userUpdate;
   }
 }

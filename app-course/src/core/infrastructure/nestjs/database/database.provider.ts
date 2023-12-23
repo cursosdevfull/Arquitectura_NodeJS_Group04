@@ -1,5 +1,8 @@
 import { DataSource } from 'typeorm';
 
+import { RoleEntity } from '../../../../modules/role/infrastructure/entities/role.entity';
+import { UserEntity } from '../../../../modules/user/infrastructure/entities/user.entity';
+
 export const databaseProviders = [
   {
     provide: 'DATA_SOURCE_MYSQL',
@@ -11,7 +14,7 @@ export const databaseProviders = [
         username: 'shidalgo',
         password: '12345',
         database: 'db',
-        entities: [],
+        entities: [UserEntity, RoleEntity],
         synchronize: true,
         logging: true,
       });
@@ -24,14 +27,12 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mongodb',
-        host: 'localhost',
-        port: 27017,
-        username: 'root',
-        password: '12345',
-        database: 'db',
-        entities: [],
+        url: 'mongodb://root:12345@localhost/db?retryWrites=true&w=majority&authSource=admin',
         synchronize: true,
-        logging: true,
+        logging: false,
+        entities: [],
+        migrations: [],
+        subscribers: [],
       });
 
       return dataSource.initialize();

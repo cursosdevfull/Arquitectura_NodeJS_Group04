@@ -1,17 +1,19 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import { UserRepository } from '../domain/repositories/user.repository';
-import { User } from '../domain/roots/user';
 import { UserInfrastructure } from '../infrastructure/user.infrastructure';
+import { UserResponseDto } from './dtos/user-response.dto';
 
 @Injectable()
-export class UserCreate {
+export class UserList {
   constructor(
     @Inject(UserInfrastructure) private readonly repository: UserRepository,
   ) {}
 
-  async execute(user: User) {
-    const userInserted = await this.repository.save(user);
-    return userInserted;
+  async execute() {
+    const usersInserted = await this.repository.list();
+    const response = UserResponseDto.fromDomainToResponse(usersInserted);
+    console.log(JSON.stringify(response, null, 2));
+    return response;
   }
 }

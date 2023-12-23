@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  mysql-server:
+  arq04-mysql-server:
     image: mysql:8
-    container_name: mysql-server
+    container_name: arq04-mysql-server
     environment:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_DATABASE: db
@@ -23,14 +23,14 @@ services:
       retries: 3
       start_interval: 5s
 
-  mysql-client:
+  arq04-mysql-client:
     image: phpmyadmin
-    container_name: mysql-client
+    container_name: arq04-mysql-client
     environment:
       PMA_ARBITRARY: 1
     restart: unless-stopped
     ports:
-      - 8080:80
+      - 8082:80
     networks:
       - net-app
     healthcheck:
@@ -40,12 +40,12 @@ services:
       retries: 3
       start_interval: 5s
     depends_on:
-      mysql-server:
+      arq04-mysql-server:
         condition: service_healthy
 
-  mongo-server:
+  arq04-mongo-server:
     image: mongo:4
-    container_name: mongo-server
+    container_name: arq04-mongo-server
     restart: unless-stopped
     ports:
       - 27017:27017
@@ -72,9 +72,9 @@ services:
       retries: 3
       start_period: 5s
 
-  mongo-client:
+  arq04-mongo-client:
     image: mongo-express:1.0.0-18-alpine3.18
-    container_name: mongo-client
+    container_name: arq04-mongo-client
     restart: unless-stopped
     ports:
       - 8081:8081
@@ -94,7 +94,7 @@ services:
     networks:
       - net-app
     depends_on:
-      mongo-server:
+      arq04-mongo-server:
         condition: service_healthy
 networks:
   net-app:

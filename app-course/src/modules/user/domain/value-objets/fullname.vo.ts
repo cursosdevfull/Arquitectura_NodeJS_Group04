@@ -6,7 +6,7 @@ export class FullnameVO {
   }
 
   static create(value: string): FullnameVO {
-    if (value.length) throw new Error('Invalid fullname');
+    if (value.length === 0) throw new Error('Invalid fullname');
     return new FullnameVO(value);
   }
 }

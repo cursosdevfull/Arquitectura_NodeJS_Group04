@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
+
+import { RoleEntity } from '../../../role/infrastructure/entities/role.entity';
 
 @Entity({ name: 'user' })
 export class UserEntity {
@@ -17,7 +19,10 @@ export class UserEntity {
   @Column({ type: 'varchar', length: 100, nullable: false })
   image: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: false })
+  @Column({ type: 'json', nullable: false })
+  address: object;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
   refreshToken: string;
 
   @Column({ type: 'datetime', nullable: false })
@@ -27,7 +32,9 @@ export class UserEntity {
   updatedAt: Date;
 
   @Column({ type: 'datetime', nullable: true })
-  deleteAt: Date;
+  deletedAt: Date;
 
-  roles: any[];
+  @ManyToMany(() => RoleEntity, (role) => role.users, { eager: true })
+  @JoinTable()
+  roles: RoleEntity[];
 }

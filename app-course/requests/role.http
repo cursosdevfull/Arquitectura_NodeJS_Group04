@@ -1,0 +1,5 @@
+### List roles
+GET http://localhost:3000/role
+content-type: application/json
+
+
