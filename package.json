@@ -1,0 +1,25 @@
+{
+  "name": "arquitectura_nodejs_group04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cursosdevfull/Arquitectura_NodeJS_Group04.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cursosdevfull/Arquitectura_NodeJS_Group04/issues"
+  },
+  "homepage": "https://github.com/cursosdevfull/Arquitectura_NodeJS_Group04#readme",
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
