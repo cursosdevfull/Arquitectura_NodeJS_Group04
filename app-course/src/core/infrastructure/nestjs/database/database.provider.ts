@@ -1,6 +1,8 @@
 import { DataSource } from 'typeorm';
 
+import { CourseEntity } from '../../../../modules/course/infrastructure/entities/course.entity';
 import { RoleEntity } from '../../../../modules/role/infrastructure/entities/role.entity';
+import { ScheduleEntity } from '../../../../modules/schedule/infrastructure/entities/schedule.entity';
 import { UserEntity } from '../../../../modules/user/infrastructure/entities/user.entity';
 
 export const databaseProviders = [
@@ -14,7 +16,7 @@ export const databaseProviders = [
         username: 'shidalgo',
         password: '12345',
         database: 'db',
-        entities: [UserEntity, RoleEntity],
+        entities: [UserEntity, RoleEntity, CourseEntity, ScheduleEntity],
         synchronize: true,
         logging: true,
       });

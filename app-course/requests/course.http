@@ -1,0 +1,7 @@
+### Create
+POST http://localhost:3000/course
+content-type: application/json
+
+{
+    "title": "Node Pro 2024"
+}
