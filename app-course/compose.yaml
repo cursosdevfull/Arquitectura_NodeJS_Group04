@@ -96,6 +96,29 @@ services:
     depends_on:
       arq04-mongo-server:
         condition: service_healthy
+
+  arq04-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: arq04-app
+    container_name: arq04-app
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/health']
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_interval: 5s
+    networks:
+      - net-app
+    depends_on:
+      arq04-mongo-server:
+        condition: service_healthy
+      arq04-mysql-server:
+        condition: service_healthy
 networks:
   net-app:
     driver: bridge
