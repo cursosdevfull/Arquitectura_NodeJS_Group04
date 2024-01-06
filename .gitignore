@@ -3,6 +3,8 @@ modelos
 MyProject
 web
 node_modules
+.env
+Dockerrun.aws.json
 
 # compiled output
 /dist
