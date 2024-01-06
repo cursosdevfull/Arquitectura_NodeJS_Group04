@@ -1,7 +1,8 @@
 ARG NODE_VERSION=18-alpine
 
 # imagen base
-FROM node:${NODE_VERSION} as base
+#FROM node:${NODE_VERSION} as base
+FROM 282865065290.dkr.ecr.us-east-1.amazonaws.com/nodejs18:latest as base
 WORKDIR /usr/src/app
 
 # las dependencias del proyecto
