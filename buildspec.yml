@@ -7,11 +7,12 @@ phases:
     commands:
       - echo Logging into AWS ECR
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 282865065290.dkr.ecr.us-east-1.amazonaws.com/arquitectura5
+      - ENVIRONMENT=$(echo $environment)
   build:
     commands:
       - echo Copying config files
-      - aws s3 cp s3://arquitectura-curso04-environment/prd/.env .env
-      - aws s3 cp s3://arquitectura-curso04-environment/prd/Dockerrun.aws.json Dockerrun.aws.json
+      - aws s3 cp s3://arquitectura-curso04-environment/$ENVIRONMENT/.env .env
+      - aws s3 cp s3://arquitectura-curso04-environment/$ENVIRONMENT/Dockerrun.aws.json Dockerrun.aws.json
       - echo Building image docker
       - docker-compose -f compose-prd.yaml build
   post_build:
