@@ -4,6 +4,7 @@ import { PaginateResult } from '../../../core/domain/interfaces/paginate.interfa
 import { CourseRepository } from '../domain/repositories/course.repository';
 import { Course } from '../domain/roots/course';
 import { CourseInfrastructure } from '../infrastructure/course.infrastructure';
+import { CourseDto, CourseResponse } from './dtos/course.dto';
 
 @Injectable()
 export class CourseApplication {
@@ -11,8 +12,9 @@ export class CourseApplication {
     @Inject(CourseInfrastructure) private readonly repository: CourseRepository,
   ) {}
 
-  async save(course: Course): Promise<Course> {
-    return await this.repository.save(course);
+  async save(course: Course): Promise<CourseResponse> {
+    const courseReturn = await this.repository.save(course);
+    return CourseDto.fromDomainToResponse(courseReturn);
   }
 
   async findById(id: string): Promise<Course> {

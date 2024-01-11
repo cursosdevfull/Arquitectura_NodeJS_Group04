@@ -1,5 +1,6 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { ApiTags } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
 
 import { ScheduleApplication } from '../../application/schedule.application';
@@ -7,6 +8,7 @@ import { ScheduleCreatedEvent } from '../../domain/events/schedule-created';
 import { Schedule, ScheduleProps } from '../../domain/roots/schedule';
 import { ScheduleCreateDto } from './dtos/schedule-create.dto';
 
+@ApiTags('Schedule')
 @Controller('schedule')
 export class ScheduleController {
   constructor(

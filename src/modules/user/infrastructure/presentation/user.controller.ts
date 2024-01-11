@@ -7,6 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { UserCreate } from '../../application/user-create';
 import { UserGetOne } from '../../application/user-get-one';
@@ -18,6 +19,7 @@ import { UserCreateDto } from './dtos/user-create.dto';
 import { UserGetOneDto } from './dtos/user-get-one.dto';
 import { UserUpdateDto } from './dtos/user.update.dto';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(

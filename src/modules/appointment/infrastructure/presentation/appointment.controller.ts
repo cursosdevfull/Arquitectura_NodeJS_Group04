@@ -1,5 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
+import { ApiExcludeController } from '@nestjs/swagger';
 
 import { AppointmentCOCommand } from '../../application/commands/appointment-co.command';
 import { AppointmentMXCommand } from '../../application/commands/appointment-mx.command';
@@ -12,6 +13,7 @@ const countryCommands = {
   MX: AppointmentMXCommand,
 };
 
+@ApiExcludeController()
 @Controller('appointment')
 export class AppointmentController {
   constructor(private readonly commandBus: CommandBus) {}

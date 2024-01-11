@@ -6,10 +6,13 @@ import {
   Param,
   Post,
   Put,
+  Version,
 } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
 
 import { CourseApplication } from '../../application/course.application';
+import { CourseResponse } from '../../application/dtos/course.dto';
 import { CourseService } from '../../application/services/course.service';
 import { Course, CourseProps } from '../../domain/roots/course';
 import { CourseByPageDto } from './dtos/course-by-page';
@@ -18,6 +21,7 @@ import { CourseIdDto } from './dtos/course-id.dto';
 import { CourseSlugDto } from './dtos/course-slug.dto';
 import { CourseUpdateDto } from './dtos/course-update.dto';
 
+@ApiTags('Course')
 @Controller('course')
 export class CourseController {
   constructor(
@@ -26,6 +30,12 @@ export class CourseController {
   ) {}
 
   @Post()
+  @Version('1')
+  @ApiOperation({ summary: 'Create a course' })
+  @ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+    type: CourseResponse,
+  })
   async insert(@Body() body: CourseCreateDto) {
     const slug = await this.courseService.generateSlug(body.title);
 
