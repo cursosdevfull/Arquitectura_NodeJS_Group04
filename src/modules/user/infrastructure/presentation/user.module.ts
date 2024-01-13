@@ -14,5 +14,6 @@ const infra = [UserInfrastructure];
   imports: [DatabaseModule],
   controllers: [UserController],
   providers: [...userProviders, ...applications, ...infra],
+  exports: [UserInfrastructure],
 })
 export class UserModule {}

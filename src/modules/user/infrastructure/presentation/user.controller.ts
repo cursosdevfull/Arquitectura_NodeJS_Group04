@@ -6,9 +6,17 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
+import {
+  RoleEnum,
+  Roles,
+} from '../../../../core/infrastructure/presentation/decorators/roles';
+import { AuthenticationGuard } from '../../../../core/infrastructure/presentation/guards/authentication.guard';
+import { AuthorizationGuard } from '../../../../core/infrastructure/presentation/guards/authorization.guard';
+import { Crypt } from '../../../../core/infrastructure/presentation/services/crypt.service';
 import { UserCreate } from '../../application/user-create';
 import { UserGetOne } from '../../application/user-get-one';
 import { UserList } from '../../application/user-list';
@@ -30,7 +38,10 @@ export class UserController {
 
   @Post()
   async insert(@Body() body: UserCreateDto) {
-    const userProperties: UserProperties = body;
+    const userProperties: UserProperties = {
+      ...body,
+      password: await Crypt.encrypt(body.password),
+    };
 
     const user = UserFactory.create(userProperties);
 
@@ -39,6 +50,8 @@ export class UserController {
   }
 
   @Get()
+  @Roles(RoleEnum.STUDENT, RoleEnum.TEACHER)
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   async list() {
     const users = await this.userList.execute();
     return users;

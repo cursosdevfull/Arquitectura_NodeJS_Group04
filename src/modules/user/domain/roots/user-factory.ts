@@ -1,5 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
-
+import { TokenService } from '../../../../core/domain/services/token.service';
 import { EmailVO } from '../value-objets/email.vo';
 import { FullnameVO } from '../value-objets/fullname.vo';
 import { IdVO } from '../value-objets/id.vo';
@@ -15,7 +14,7 @@ export class UserFactory {
     FullnameVO.create(props.fullname);
     EmailVO.create(props.email);
 
-    props.refreshToken = uuidv4();
+    props.refreshToken = TokenService.generateRefreshToken();
 
     return new User(props);
   }

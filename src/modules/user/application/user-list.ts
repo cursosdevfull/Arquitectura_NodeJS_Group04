@@ -13,7 +13,6 @@ export class UserList {
   async execute() {
     const usersInserted = await this.repository.list();
     const response = UserResponseDto.fromDomainToResponse(usersInserted);
-    console.log(JSON.stringify(response, null, 2));
     return response;
   }
 }

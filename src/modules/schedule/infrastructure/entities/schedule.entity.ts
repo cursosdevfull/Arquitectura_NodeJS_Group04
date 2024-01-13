@@ -1,6 +1,6 @@
-import { CourseEntity } from 'src/modules/course/infrastructure/entities/course.entity';
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 
+import { CourseEntity } from '../../../../modules/course/infrastructure/entities/course.entity';
 import { Prices } from '../../domain/entities/prices';
 
 @Entity({ name: 'schedule' })

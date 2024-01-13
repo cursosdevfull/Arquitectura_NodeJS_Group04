@@ -19,7 +19,7 @@ export const databaseProviders = [
         database: AppService.db_database,
         entities: [UserEntity, RoleEntity, CourseEntity, ScheduleEntity],
         synchronize: true,
-        logging: true,
+        logging: false,
       });
 
       return dataSource.initialize();

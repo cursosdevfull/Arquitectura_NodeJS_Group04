@@ -19,12 +19,24 @@ export class UserInfrastructure implements UserRepository {
     return user;
   }
 
-  findByEmail(email: string): Promise<User> {
-    throw new Error('Method not implemented.');
+  async findByEmail(email: string): Promise<User> {
+    const userEntity = await this.repository.findOne({ where: { email } });
+    if (!userEntity) {
+      return null;
+    }
+
+    return UserDto.fromDataToDomain(userEntity) as User;
   }
 
-  findByRefreshToken(refreshToken: string): Promise<User> {
-    throw new Error('Method not implemented.');
+  async findByRefreshToken(refreshToken: string): Promise<User> {
+    const userEntity = await this.repository.findOne({
+      where: { refreshToken },
+    });
+    if (!userEntity) {
+      return null;
+    }
+
+    return UserDto.fromDataToDomain(userEntity) as User;
   }
 
   async findById(id: string): Promise<User> {
