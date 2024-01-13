@@ -6,3 +6,4 @@ MyProject
 node_modules
 .env
 dist
+test
